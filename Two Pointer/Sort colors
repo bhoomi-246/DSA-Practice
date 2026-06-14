@@ -1,0 +1,23 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        int low=0, mid=0, high=nums.length-1;
+        while(mid<=high){
+            if(nums[mid]==0){   //agar 0 mil gya to low se swap kr do
+                int temp=nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=temp;
+                low++;
+                mid++;
+            }
+            else if(nums[mid]==1){ //If element is 1, it is already in correct middle position.
+                mid++;
+            }
+            else{
+                int temp=nums[mid];
+                nums[mid]=nums[high];
+                nums[high]=temp;
+                high--;
+            }
+        }
+    }
+}
