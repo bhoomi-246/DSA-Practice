@@ -1,0 +1,22 @@
+import java.util.*;
+public class Solution {
+    public int longestConsecutive(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        for(int num:nums){
+            set.add(num);
+        }
+        int longest=0;
+        for(int num:set){
+            if(!set.contains(num-1)){ //check kya num-1 exist krta h set me if ni to num hi starting point hoga
+                int current=num;
+                int length=1;
+                while(set.contains(current+1)){  //if num+1 exist krta h to wahi se length increase krte jao
+                    current++;
+                    length++;
+                }
+                longest=Math.max(longest,length);
+            }
+        }
+        return longest;
+    }
+}
