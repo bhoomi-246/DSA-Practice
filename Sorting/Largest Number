@@ -1,0 +1,22 @@
+import java.util.*;
+
+class Solution {
+    public String largestNumber(int[] nums) {
+        
+        String[] arr = new String[nums.length];  //string array banaya
+
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = String.valueOf(nums[i]);  //convert integer into string
+        }
+        Arrays.sort(arr, (a, b) -> (b + a).compareTo(a + b));  //compare(a+b) bada h ya (b+a)
+        if (arr[0].equals("0")) {
+            return "0";
+        }
+        StringBuilder result = new StringBuilder();  //final ans banane ke liye
+         
+        for (String s : arr) {  //ek ek string add kro
+            result.append(s);
+        }
+        return result.toString();  //StringBuilder ko String mein convert karke return kar do.
+    }
+}
