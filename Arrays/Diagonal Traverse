@@ -1,0 +1,28 @@
+class Solution {
+    public int[] findDiagonalOrder(int[][] mat) {
+        List<Integer> ans = new ArrayList<>();
+        int m=mat.length;
+        int n=mat[0].length;
+        for(int d=0;d<m+n-1;d++){
+            ArrayList<Integer> list = new ArrayList<>();  
+            int r = (d < n) ? 0 : d - n + 1;
+            int c = (d < n) ? d : n - 1;
+
+            while(r<m && c>=0){
+                list.add(mat[r][c]);
+                r++;
+                c--;
+            }
+            if(d%2==0){
+                Collections.reverse(list);
+            }
+            ans.addAll(list);
+        }
+        int[] result = new int[ans.size()];
+
+        for (int i = 0; i < ans.size(); i++) {
+            result[i] = ans.get(i);
+        }
+        return result;
+    }
+}
