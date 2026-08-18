@@ -1,0 +1,24 @@
+class Solution {
+    public boolean canPartition(int[] nums) {
+        int sum=0;
+        for(int x:nums){
+            sum+=x;
+        }
+        if(sum%2!=0)
+            return false;
+        return solve(nums,0,sum/2);    
+    }
+    private boolean solve(int[] nums,int index,int target){
+        if(target==0){
+            return true;
+        }
+        if(index==nums.length){
+            return false;
+        }
+        if(nums[index]<=target){
+            if(solve(nums,index+1,target-nums[index]));
+            return true;
+        }
+        return solve(nums,index+1,target);
+    }
+}
