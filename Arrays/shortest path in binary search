@@ -1,0 +1,59 @@
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+
+        int m = grid.length;
+        int n = grid[0].length;
+
+        // Start or destination blocked
+        if (grid[0][0] == 1 || grid[m - 1][n - 1] == 1) {
+            return -1;
+        }
+
+        Queue<int[]> q = new LinkedList<>();
+
+        // row, col, distance
+        q.offer(new int[]{0, 0, 1});
+
+        // Mark starting cell visited
+        grid[0][0] = 1;
+
+        int[][] directions = {
+            {-1, -1}, {-1, 0}, {-1, 1},
+            {0, -1},           {0, 1},
+            {1, -1},  {1, 0},  {1, 1}
+        };
+
+        while (!q.isEmpty()) {
+
+            int[] curr = q.poll();
+
+            int i = curr[0];
+            int j = curr[1];
+            int dist = curr[2];
+
+            // Destination reached
+            if (i == m - 1 && j == n - 1) {
+                return dist;
+            }
+
+            // Check all 8 directions
+            for (int[] dir : directions) {
+
+                int ni = i + dir[0];
+                int nj = j + dir[1];
+
+                // Valid + unvisited/open cell
+                if (ni >= 0 && nj >= 0 &&
+                    ni < m && nj < n &&
+                    grid[ni][nj] == 0) {
+
+                    grid[ni][nj] = 1;
+
+                    q.offer(new int[]{ni, nj, dist + 1});
+                }
+            }
+        }
+
+        return -1;
+    }
+}
